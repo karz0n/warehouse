@@ -1,0 +1,22 @@
+---
+Language: Cpp
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: Align
+AlignOperands: true
+AlignTrailingComments: true
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakAfterReturnType: All
+BraceWrapping:
+  BeforeCatch: true
+  BeforeElse: true
+BreakBeforeBraces: Stroustrup
+Cpp11BracedListStyle: true
+SpaceBeforeCpp11BracedList: false
+FixNamespaceComments: true
+NamespaceIndentation: None
+SortIncludes: false
+SortUsingDeclarations: false
+SpaceAfterCStyleCast: true
+SpacesInContainerLiterals: false
+SpaceAfterTemplateKeyword: false
+...
