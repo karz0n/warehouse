@@ -29,10 +29,8 @@ This will define the following variables:
 
 if(CPPCHECK_ROOT_DIR)
     find_program(CPPCHECK_BIN
-        NAMES
-            cppcheck
-        PATHS
-            "${CPPCHECK_ROOT_DIR}"
+        NAMES cppcheck
+        PATHS "${CPPCHECK_ROOT_DIR}"
         NO_DEFAULT_PATH)
 endif()
 
@@ -43,10 +41,20 @@ endif()
 if(CPPCHECK_BIN)
     execute_process(
         COMMAND ${CPPCHECK_BIN} --version
-        OUTPUT_VARIABLE CppCheck_VERSION
+        OUTPUT_VARIABLE CPPCHECK_VERSION_OUTPUT
         ERROR_QUIET
         OUTPUT_STRIP_TRAILING_WHITESPACE
     )
+
+    if(CPPCHECK_VERSION_OUTPUT MATCHES "^Cppcheck .*")
+            string(REGEX
+                   REPLACE "Cppcheck ([.0-9]+)"
+                           "\\1"
+                           CppCheck_VERSION
+                           "${CPPCHECK_VERSION_OUTPUT}")
+    else()
+        message(FATAL "Couldn't recognize ${CPPCHECK_BIN} version")
+    endif()
 
     set(CPPCHECK_THREADS_ARG "-j4"
         CACHE STRING "The number of threads to use")
@@ -100,8 +108,7 @@ if(CPPCHECK_BIN)
     if(NOT CPPCHECK_XML_OUTPUT)
         set(CPPCHECK_COMMAND
             ${CPPCHECK_BIN}
-            ${CPPCHECK_ALL_ARGS}
-        )
+            ${CPPCHECK_ALL_ARGS})
     else()
         set(CPPCHECK_COMMAND
             ${CPPCHECK_BIN}
@@ -112,15 +119,15 @@ if(CPPCHECK_BIN)
     endif()
 endif()
 
-# handle the QUIETLY and REQUIRED arguments and set YAMLCPP_FOUND to TRUE if all listed variables are TRUE
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(
     CppCheck
-    DEFAULT_MSG
-    CPPCHECK_BIN)
+    REQUIRED_VARS CPPCHECK_BIN
+    VERSION_VAR CppCheck_VERSION)
 
 mark_as_advanced(
     CPPCHECK_BIN
+    CPPCHECK_VERSION_OUTPUT
     CPPCHECK_THREADS_ARG
     CPPCHECK_PROJECT_ARG
     CPPCHECK_BUILD_DIR_ARG
@@ -134,7 +141,4 @@ if(CppCheck_FOUND)
     file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/analysis/cppcheck)
     add_custom_target(cppcheck-analysis
         COMMAND ${CPPCHECK_COMMAND})
-    message("CppCheck found. Use cppcheck-analysis targets to run it")
-else()
-    message("CppCheck not found")
 endif()
