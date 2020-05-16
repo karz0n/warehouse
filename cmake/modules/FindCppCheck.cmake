@@ -7,14 +7,6 @@ FindCppCheck
 
 Finds the CppCheck Tool.
 
-Custom Targets
-^^^^^^^^^^^^^^^^
-
-This module provides the following custom targets, if found:
-
-``cppcheck-analysis``
-  The CppCheck custom target
-
 Result Variables
 ^^^^^^^^^^^^^^^^
 
@@ -136,9 +128,3 @@ mark_as_advanced(
     CPPCHECK_ERROR_EXITCODE_ARG
     CPPCHECK_CHECKS_ARGS
     CPPCHECK_OTHER_ARGS)
-
-if(CppCheck_FOUND)
-    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/analysis/cppcheck)
-    add_custom_target(cppcheck-analysis
-        COMMAND ${CPPCHECK_COMMAND})
-endif()
