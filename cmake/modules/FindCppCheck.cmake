@@ -21,8 +21,10 @@ This will define the following variables:
 
 if(CPPCHECK_ROOT_DIR)
     find_program(CPPCHECK_BIN
-        NAMES cppcheck
-        PATHS "${CPPCHECK_ROOT_DIR}"
+        NAMES
+            cppcheck
+        PATHS
+            "${CPPCHECK_ROOT_DIR}"
         NO_DEFAULT_PATH)
 endif()
 
@@ -100,7 +102,8 @@ if(CPPCHECK_BIN)
     if(NOT CPPCHECK_XML_OUTPUT)
         set(CPPCHECK_COMMAND
             ${CPPCHECK_BIN}
-            ${CPPCHECK_ALL_ARGS})
+            ${CPPCHECK_ALL_ARGS}
+        )
     else()
         set(CPPCHECK_COMMAND
             ${CPPCHECK_BIN}

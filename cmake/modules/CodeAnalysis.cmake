@@ -12,12 +12,12 @@ Custom Targets
 
 This module provides the following custom target, if found:
 
-``cppcheck-analysis``
+``codeanalysis``
   The code analysis custom target.
 
 #]=======================================================================]
 
-if(TARGET cppcheck-analysis)
+if(TARGET codeanalysis)
     return()
 endif()
 
@@ -26,6 +26,6 @@ find_package(CppCheck)
 if(CppCheck_FOUND)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/analysis/cppcheck)
-    add_custom_target(cppcheck-analysis
+    add_custom_target(codeanalysis
         COMMAND ${CPPCHECK_COMMAND})
 endif()

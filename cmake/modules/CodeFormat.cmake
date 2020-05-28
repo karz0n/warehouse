@@ -37,7 +37,7 @@ endif()
 
 find_package(ClangFormat)
 
-if (CppCheck_FOUND)
+if (ClangFormat_FOUND)
     # Find all source files
     set(CLANG_FORMAT_CXX_FILE_EXTENSIONS
             ${CLANG_FORMAT_CXX_FILE_EXTENSIONS}
@@ -59,7 +59,7 @@ if (CppCheck_FOUND)
 
     add_custom_target(codeformat
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMENT "Running clang-format to change files"
+        COMMENT "Running clang-format to reformat files"
         VERBATIM
         COMMAND ${CLANG_FORMAT_BIN}
         -style=file
