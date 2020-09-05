@@ -2,7 +2,7 @@
 Language: Cpp
 BasedOnStyle: WebKit
 AlignAfterOpenBracket: Align
-AlignOperands: true
+AlignOperands: Align
 AlignTrailingComments: true
 AllowShortFunctionsOnASingleLine: None
 AlwaysBreakAfterReturnType: All
@@ -19,4 +19,6 @@ SortUsingDeclarations: false
 SpaceAfterCStyleCast: true
 SpacesInContainerLiterals: false
 SpaceAfterTemplateKeyword: false
+ColumnLimit: 100
+AlwaysBreakTemplateDeclarations: Yes
 ...
